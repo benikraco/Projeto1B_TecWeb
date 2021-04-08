@@ -1,0 +1,43 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'notes/css/getit.css' %}">
+<div class="appbar">
+    <img src="{% static 'notes/img/logo-getit.png' %}" class='logo' />
+    <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+</div>
+
+<div>
+    {% for note in notes %} 
+    <div class="card-content">
+        <p>{{note.content}}</p>
+      </div>
+      <div class='btn-container' style='display: flex; flex-direction: row; justify-content:space-evenly; margin-top: 20px;'>
+        <form method='post'>
+          {% csrf_token %}
+          <textarea name='id' style='display: none'>{{note.id}}</textarea>
+          <button class='btn-remove' style='color :white; background-color: red; border: 1px solid red; border-radius:5px' type='submit'>Remover</button>
+        </form>
+        <form action='/edit' method='post'>
+          {% csrf_token %}
+          <input name='edit' style='display: none' value='edit'></input>
+          <textarea name='id' style='display: none' >{{note.id}}</textarea>
+          <button class='btn-remove' style='color: white; background-color: rgb(14, 180, 14); border: 1px solid rgb(14, 180, 14); border-radius:5px' type='submit'>Editar</button>
+        </form>
+      </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+<script src="{% static 'notes/js/getit.js' %}"></script>
+
+
+{% endblock %}

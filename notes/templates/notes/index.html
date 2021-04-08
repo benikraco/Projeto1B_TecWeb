@@ -14,8 +14,8 @@
     {% csrf_token %}
     <div class ='note-input-inside-container'>
       <input class = "form-card-title" id="titulo" type="text" name="titulo" placeholder="Título" >
-      <textarea class="autoresize" name="detalhes" placeholder="Digite o conteúdo..."></textarea>
-      <textarea name="tag" id="tag" cols="150" rows="1" placeholder="tag"></textarea>
+      <textarea class="autoresize" cols = "80" rows = "4" name="detalhes" placeholder="Digite o conteúdo..."></textarea>
+      <textarea name="tag" id="tag" cols="50" rows="1" placeholder="tag"></textarea>
       <button class="btn" type="submit" > Criar </button>
     </div>
   </form>
@@ -34,7 +34,6 @@
     <div class='btn-container' style='display: flex; flex-direction: row; justify-content:space-evenly; margin-top: 20px;'>
       <form method='post'>
         {% csrf_token %}
-        <!-- <textarea name='tagName' style='display: none'>{{note.tag.name}}</textarea>                -->
         <textarea name='id' style='display: none'>{{note.id}}</textarea>
         <button class='btn-remove' style='color :white; background-color: red; border: 1px solid red; border-radius:5px' type='submit'>Remover</button>
       </form>
@@ -57,7 +56,7 @@
   {% for tag in tag_list %}
   <form method="POST" action="/taglist">
     {% csrf_token %}
-    <textarea name="tag" id="tag" cols="150" rows="1" style="display: none"> {{tag.nome}} </textarea>
+    <textarea name="tag" id="tag" cols="50" rows="1" style="display: none"> {{tag.nome}} </textarea>
     <button type = "submit" >{{tag.nome}}</button>
   </form>
   {% endfor %}
