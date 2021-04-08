@@ -15,6 +15,7 @@
     <div class ='note-input-inside-container'>
       <input class = "form-card-title" id="titulo" type="text" name="titulo" placeholder="Título" >
       <textarea class="autoresize" name="detalhes" placeholder="Digite o conteúdo..."></textarea>
+      <textarea name="tag" id="tag" cols="150" rows="1" placeholder="tag"></textarea>
       <button class="btn" type="submit" > Criar </button>
     </div>
   </form>
@@ -49,6 +50,19 @@
 </div>
 
 </main>
+
+<div style = "width:80%">
+  <h2> TAGS DISPONÍVEIS </h2>
+<div> 
+  {% for tag in tag_list %}
+  <form method="POST" action="/taglist">
+    {% csrf_token %}
+    <textarea name="tag" id="tag" cols="150" rows="1" style="display: none"> {{tag.nome}} </textarea>
+    <button type = "submit" >{{tag.nome}}</button>
+  </form>
+  {% endfor %}
+</div>
+</div>
 <script type="text/javascript" src="templates\components\getit.js"></script>
 
 {% endblock %}

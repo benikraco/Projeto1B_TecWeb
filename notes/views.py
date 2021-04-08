@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Note
+from .models import Note, Tag
 
 
 def index(request):
@@ -11,10 +11,19 @@ def index(request):
         if request.POST.get("edit"):  
             title = request.POST.get('title')
             content = request.POST.get('content')
+            tag = request.POST.get('tag')
+
+            try:
+                tag_tofind = Tag.objects.get(nome = tag)
+            except:
+                tag_tofind = Tag(nome = tag)
+                tag_tofind.save()
+
             id = request.POST.get("id")
             note = Note.objects.get(id = request.POST.get("id"))
             note.title = title
             note.content = content
+            note.tag = tag_tofind
             note.save()
 
 
@@ -26,17 +35,23 @@ def index(request):
         else:
             title = request.POST.get('titulo')
             content = request.POST.get('detalhes')
-            note = Note(title = title, content = content)
-            note.save()
-
-
-
+            tag = request.POST.get('tag')
+            try:
+                tag_existe = Tag.objects.get(nome = tag)
+                note = Note(title = title, content = content, tag = tag_existe)
+                note.save()
+            except:
+                tag_naoexiste = Tag(nome = tag)
+                tag_naoexiste.save()
+                note = Note(title = title, content = content, tag = tag_naoexiste)
+                note.save() 
 
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
         return redirect('index')
     else:
         all_notes = Note.objects.all()
-        return render(request, 'notes/index.html', {'notes': all_notes})
+        all_tags = Tag.objects.all()
+        return render(request, 'notes/index.html', {'notes': all_notes, 'tag_list': all_tags})
 
 def edit(request):
     if request.POST.get('edit'):
