@@ -66,5 +66,6 @@ def taglist(request):
         tag = request.POST.get("tag")
         print(tag)
         tagzao = Tag.objects.get(nome = tag)
+        print (tagzao)
         notes = Note.objects.filter(tag = tagzao)
     return render(request, 'notes/taglist.html', {'notes': notes})

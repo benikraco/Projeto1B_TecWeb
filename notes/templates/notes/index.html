@@ -56,7 +56,7 @@
   {% for tag in tag_list %}
   <form method="POST" action="/taglist">
     {% csrf_token %}
-    <textarea name="tag" id="tag" cols="50" rows="1" style="display: none"> {{tag.nome}} </textarea>
+    <input name="tag" id="tag" type="hidden" value="{{tag.nome}}"></input>
     <button type = "submit" >{{tag.nome}}</button>
   </form>
   {% endfor %}
