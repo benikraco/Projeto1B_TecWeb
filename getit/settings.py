@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'uvi=^^pot4!c!19l7@o@mdizj=k%k1-&_j=1sb4w7kf*#$cums'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['blooming-retreat-93133.herokuapp.com', 'localhost', '127.0.0.1']
 
